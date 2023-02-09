@@ -5,9 +5,9 @@ import java.awt.event.ActionListener;
 
 public class View {
 
-    private JTextField textField1;
-    private JButton button1;
-    private JTextArea textArea1;
+    private JTextField EnterMessage;
+    private JButton Sicka;
+    private JTextArea ChatHistory;
     private JPanel Base;
     String message = "";
 
@@ -15,18 +15,18 @@ public class View {
         return Base;
     }
 
-    public String GetMessage(){return textArea1.getText();}
+    public String GetMessage(){return ChatHistory.getText();}
     public void ResetText(){
-        textArea1.setText("");
+        ChatHistory.setText("");
     }
 
     public void Chat(){
-        message += "\n" + textArea1.getText();
-        textField1.setText(message);
+        message += "\n" + ChatHistory.getText();
+        EnterMessage.setText(message);
         ResetText();
     }
     public void setButtonPresser(ActionListener bp){
-        button1.addActionListener(bp);
+        Sicka.addActionListener(bp);
     }
 
 }

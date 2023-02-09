@@ -23,7 +23,7 @@ public class Controller extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
 
-           // client.sendMessage(view.GetMessage());
+           client.sendMessage(view.GetMessage());
             view.Chat();
 
         }
