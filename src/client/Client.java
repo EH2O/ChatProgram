@@ -60,7 +60,6 @@ public class Client {
 
     public void StartClient(Client me){
         me.getStreams();
-
         ListenerThread l = new ListenerThread(me.in, System.out);
         Thread listener = new Thread(l);
         listener.start();
