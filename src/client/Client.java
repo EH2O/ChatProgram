@@ -17,6 +17,7 @@ public class Client {
     String newMessage;
     PrintWriter out;
     BufferedReader in;
+    Controller c;
 
     public Client(String ip, int port) {
         this.ip = ip;
@@ -29,6 +30,7 @@ public class Client {
         }
         System.out.println("Connection ready...");
     }
+
 
 
 
@@ -48,6 +50,7 @@ public class Client {
         String msg = "";
         while (!msg.equals("QUIT")) {
             msg = tgb.nextLine();
+
             out.println("CLIENT: " + msg);
         }
     }
@@ -55,14 +58,15 @@ public class Client {
         out.println("CLIENT: " + message);
     }
 
-    public void StartClient(){
-        Client me = new Client(ip, port);
+    public void StartClient(Client me){
         me.getStreams();
+
         ListenerThread l = new ListenerThread(me.in, System.out);
         Thread listener = new Thread(l);
         listener.start();
         me.runProtocol();
         me.shutDown();
+
     }
 
     private void shutDown() {
@@ -71,6 +75,10 @@ public class Client {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void setController(Controller controller) {
+        this.c = controller;
     }
 }
 

@@ -7,10 +7,12 @@ import java.io.PrintStream;
 public class ListenerThread implements Runnable{
     private BufferedReader in;
     private PrintStream out;
+    public Controller c;
 
     public ListenerThread(BufferedReader in, PrintStream out) {
         this.in = in;
         this.out = out;
+
     }
 
     @Override
@@ -22,7 +24,7 @@ public class ListenerThread implements Runnable{
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            out.println(msg);
+         //   c.FromServer("server" , msg);
         }
     }
 

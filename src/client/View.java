@@ -15,15 +15,14 @@ public class View {
         return Base;
     }
 
-    public String GetMessage(){return ChatHistory.getText();}
+    public String GetMessage(){return EnterMessage.getText();}
     public void ResetText(){
-        ChatHistory.setText("");
+        EnterMessage.setText("");
     }
 
-    public void Chat(){
-        message += "\n" + ChatHistory.getText();
-        EnterMessage.setText(message);
-        ResetText();
+    public void Chat(String ID , String message){
+        message += "\n" + ID+ ": " + message;
+        ChatHistory.setText(message);
     }
     public void setButtonPresser(ActionListener bp){
         Sicka.addActionListener(bp);
