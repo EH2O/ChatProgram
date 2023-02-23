@@ -17,12 +17,20 @@ public class Controller extends JFrame {
         this.pack();
         this.setVisible(true);
         view.setButtonPresser(new bp());
-        client.StartClient(c);
+        view.setButtonPresser(new Dis());
+        client.StartClient(this);
 
     }
 
 
+    private class Dis implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
 
+        client.shutDown();
+
+        }
+    }
 
     private class bp implements ActionListener {
         @Override
@@ -31,22 +39,16 @@ public class Controller extends JFrame {
             client.sendMessage(view.GetMessage());
 
             view.Chat("Client", view.GetMessage());
+            view.ResetText();
 
         }
     }
     public void FromServer(String ID, String message){
-        Update(ID, message);
+        view.Chat(ID, message);
     }
-    private void Update(String ID, String message){
-        if (ID.equals("local")){
-            client.sendMessage(view.GetMessage());
-            view.Chat("Client", view.GetMessage());
-        }else {
-            view.Chat(ID, message);
-        }
-    }
+
     public static void main(String[] args) throws InterruptedException {
-        Client c = new Client("10.80.47.216", 6240);
+        Client c = new Client("10.80.44.255", 6240);
         View v = new View();
         Controller thisIsTheProgram = new Controller(c,v);
         thisIsTheProgram.setVisible(true);

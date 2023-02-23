@@ -50,7 +50,7 @@ public class Server {
         String msg = "";
         while (!msg.equals("QUIT")) {
             msg = tgb.nextLine();
-            out.println("SERVER: " + msg);
+            out.println(msg);
         }
     }
 

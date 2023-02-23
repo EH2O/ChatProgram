@@ -12,9 +12,6 @@ public class Client {
     int port;
     Socket socket;
 
-    String savedData;
-
-    String newMessage;
     PrintWriter out;
     BufferedReader in;
     Controller c;
@@ -44,36 +41,27 @@ public class Client {
         System.out.println("Streams ready...");
     }
 
-    public void runProtocol() {
-        Scanner tgb = new Scanner(System.in);
-        System.out.println("chatting...");
-        String msg = "";
-        while (!msg.equals("QUIT")) {
-            msg = tgb.nextLine();
 
-            out.println("CLIENT: " + msg);
-        }
-    }
     public void sendMessage(String message){
         out.println("CLIENT: " + message);
     }
 
-    public void StartClient(Client me){
-        me.getStreams();
-        ListenerThread l = new ListenerThread(me.in, System.out);
+    public void StartClient(Controller Con){
+        this.getStreams();
+        ListenerThread l = new ListenerThread(this.in, Con);
         Thread listener = new Thread(l);
         listener.start();
-        me.runProtocol();
-        me.shutDown();
 
     }
 
-    private void shutDown() {
+    public void shutDown() {
         try {
             socket.close();
+            System.out.println("Disconnected");
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 
     public void setController(Controller controller) {

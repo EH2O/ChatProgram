@@ -6,12 +6,12 @@ import java.io.PrintStream;
 
 public class ListenerThread implements Runnable{
     private BufferedReader in;
-    private PrintStream out;
+    private Controller Con;
 
 
-    public ListenerThread(BufferedReader in, PrintStream out) {
+    public ListenerThread(BufferedReader in, Controller Con) {
         this.in = in;
-        this.out = out;
+        this.Con = Con;
 
     }
 
@@ -24,7 +24,7 @@ public class ListenerThread implements Runnable{
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
+            Con.FromServer("Server:" , msg);
         }
     }
 

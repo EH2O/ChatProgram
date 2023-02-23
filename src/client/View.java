@@ -9,7 +9,8 @@ public class View {
     private JButton Sicka;
     private JTextArea ChatHistory;
     private JPanel Base;
-    String message = "";
+    private JButton disconnectButton;
+    String HisMessage = " ";
 
     public JPanel getPanel() {
         return Base;
@@ -21,11 +22,15 @@ public class View {
     }
 
     public void Chat(String ID , String message){
-        message += "\n" + ID+ ": " + message;
-        ChatHistory.setText(message);
+        HisMessage += "\n" + ID+ ": " + message;
+        ChatHistory.setText(HisMessage);
+
     }
     public void setButtonPresser(ActionListener bp){
         Sicka.addActionListener(bp);
+    }
+    public void setButtonPresserDis(ActionListener Dis){
+        disconnectButton.addActionListener(Dis);
     }
 
 }
