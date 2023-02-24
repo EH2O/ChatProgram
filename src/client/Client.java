@@ -11,7 +11,7 @@ public class Client {
     String ip;
     int port;
     Socket socket;
-
+    boolean Connected = false;
     PrintWriter out;
     BufferedReader in;
     Controller c;
@@ -19,17 +19,22 @@ public class Client {
     public Client(String ip, int port) {
         this.ip = ip;
         this.port = port;
+        CreateSocket(ip,port);
+        if(Connected){
+        System.out.println("Connection ready...");
+        }
+    }
+
+
+    private void CreateSocket(String ip, int port){
+        Connected = true;
         try {
             socket = new Socket(ip,port);
         } catch (IOException e) {
             System.err.println("Failed to connect to server");
-            e.printStackTrace();
+            Connected = false;
         }
-        System.out.println("Connection ready...");
     }
-
-
-
 
     public void getStreams() {
         try {
@@ -47,10 +52,17 @@ public class Client {
     }
 
     public void StartClient(Controller Con){
-        this.getStreams();
-        ListenerThread l = new ListenerThread(this.in, Con);
-        Thread listener = new Thread(l);
-        listener.start();
+        while(!Connected){
+            CreateSocket(ip,port);
+        }
+            System.out.println("Connected");
+            Con.SetConnection(true);
+            this.getStreams();
+            ListenerThread l = new ListenerThread(this.in, Con);
+            Thread listener = new Thread(l);
+            listener.start();
+
+
 
     }
 
@@ -61,6 +73,7 @@ public class Client {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        c.Disconnected();
 
     }
 

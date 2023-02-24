@@ -10,7 +10,9 @@ public class View {
     private JTextArea ChatHistory;
     private JPanel Base;
     private JButton disconnectButton;
-    String HisMessage = " ";
+    String HisMessage = "";
+    boolean Statues = false;
+
 
     public JPanel getPanel() {
         return Base;
@@ -24,6 +26,16 @@ public class View {
     public void Chat(String ID , String message){
         HisMessage += "\n" + ID+ ": " + message;
         ChatHistory.setText(HisMessage);
+
+    }
+    public void ChangeStatues(){
+        Statues = !Statues;
+        if(!Statues){
+            disconnectButton.setText("Disconnect");
+        }else{
+            disconnectButton.setText("Connect");
+        }
+
 
     }
     public void setButtonPresser(ActionListener bp){

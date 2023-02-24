@@ -7,7 +7,9 @@ import java.awt.event.ActionListener;
 public class Controller extends JFrame {
         Client client;
         View view;
-
+        boolean Connected;
+        static String ip = "10.80.44.255";
+        static int port = 6240;
     public Controller(Client c, View v) {
         this.client = c;
         this.view = v;
@@ -17,21 +19,28 @@ public class Controller extends JFrame {
         this.pack();
         this.setVisible(true);
         view.setButtonPresser(new bp());
-        view.setButtonPresser(new Dis());
+        view.setButtonPresserDis(new Dis());
         client.StartClient(this);
 
     }
 
-
+    public void SetConnection(boolean Stat){
+        this.Connected = Stat;
+    }
     private class Dis implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-
-        client.shutDown();
-
+        if(Connected){
+            client.shutDown();
+        }else{
+            client.StartClient(Controller.this);
+        }
+        Disconnected();
         }
     }
-
+    public void Disconnected(){
+        view.ChangeStatues();
+    }
     private class bp implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -48,7 +57,7 @@ public class Controller extends JFrame {
     }
 
     public static void main(String[] args) throws InterruptedException {
-        Client c = new Client("10.80.44.255", 6240);
+        Client c = new Client(ip, port);
         View v = new View();
         Controller thisIsTheProgram = new Controller(c,v);
         thisIsTheProgram.setVisible(true);
