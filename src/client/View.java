@@ -10,6 +10,7 @@ public class View {
     private JTextArea ChatHistory;
     private JPanel Base;
     private JButton disconnectButton;
+    private JScrollBar scrollBar1;
     String HisMessage = "";
     boolean Statues = false;
 
