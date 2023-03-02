@@ -26,19 +26,6 @@
           <text value="Send :)"/>
         </properties>
       </component>
-      <component id="2e3c7" class="javax.swing.JTextArea" binding="ChatHistory">
-        <constraints>
-          <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="4" hsize-policy="0" anchor="0" fill="3" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="50"/>
-          </grid>
-        </constraints>
-        <properties>
-          <editable value="false"/>
-          <font name="Algerian" size="28" style="1"/>
-          <lineWrap value="true"/>
-          <wrapStyleWord value="false"/>
-        </properties>
-      </component>
       <component id="5749b" class="javax.swing.JButton" binding="disconnectButton" default-binding="true">
         <constraints>
           <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
@@ -47,12 +34,26 @@
           <text value="Disconnect"/>
         </properties>
       </component>
-      <component id="5daec" class="javax.swing.JScrollBar" binding="scrollBar1" default-binding="true">
+      <scrollpane id="ade65">
         <constraints>
-          <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="6" hsize-policy="0" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+          <grid row="1" column="0" row-span="1" col-span="3" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties/>
-      </component>
+        <border type="none"/>
+        <children>
+          <component id="2e3c7" class="javax.swing.JTextArea" binding="ChatHistory">
+            <constraints/>
+            <properties>
+              <editable value="false"/>
+              <enabled value="false"/>
+              <font name="Algerian" size="28" style="1"/>
+              <lineWrap value="true"/>
+              <text value=""/>
+              <wrapStyleWord value="false"/>
+            </properties>
+          </component>
+        </children>
+      </scrollpane>
     </children>
   </grid>
 </form>

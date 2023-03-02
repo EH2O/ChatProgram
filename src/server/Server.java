@@ -6,11 +6,13 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Server {
     ServerSocket server;
     Socket client;
-
+    int TotalUsers = 0;
+    static ArrayList<Clients> users = new ArrayList<>();
     PrintWriter out;
     BufferedReader in;
 
@@ -26,7 +28,8 @@ public class Server {
 
     private void acceptClient() {
         try {
-            client = server.accept();
+            users.add(new Clients(server.accept(), TotalUsers, this));
+            TotalUsers++;
         } catch (IOException e) {
             System.err.println("Failed to connect to client");
             e.printStackTrace();
@@ -34,15 +37,7 @@ public class Server {
         System.out.println("client connected...");
     }
 
-    private void getStreams() {
-        try {
-            out = new PrintWriter(client.getOutputStream(), true);
-            in = new BufferedReader(new InputStreamReader(client.getInputStream()));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        System.out.println("Streams ready...");
-    }
+
 
     private void runProtocol() {
         Scanner tgb = new Scanner(System.in);
@@ -57,12 +52,15 @@ public class Server {
     public static void main(String[] args) throws InterruptedException {
         Server s = new Server(6240);
         s.acceptClient();
-        s.getStreams();
-        ListenerThread l = new ListenerThread(s.in, System.out);
-        Thread listener = new Thread(l);
-        listener.start();
+        for (int i = 0; i < s.TotalUsers; i++) {
+            users.get(i).setListen();
+        }
+
         s.runProtocol();
-        listener.join();
+        for (Clients user : users) {
+            user.ListenJoin();
+        }
+
         s.shutdown();
     }
 

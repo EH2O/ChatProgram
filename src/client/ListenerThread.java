@@ -2,7 +2,7 @@ package client;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.PrintStream;
+
 
 public class ListenerThread implements Runnable{
     private final BufferedReader in;
@@ -20,7 +20,7 @@ public class ListenerThread implements Runnable{
         String msg = "";
         while (Connected) {
             if(!msg.equals("")){
-            Con.FromServer("Server" , msg);
+            Con.FromServer("Other" , msg);
             }
             try {
                 msg = in.readLine();
@@ -40,5 +40,6 @@ public class ListenerThread implements Runnable{
             e.printStackTrace();
         }
         Con.Disconnected();
+        Con.SetConnection(false);
     }
 }

@@ -35,7 +35,7 @@ public class Controller extends JFrame {
         }else{
             client.StartClient(Controller.this);
         }
-        Disconnected();
+            Disconnected();
         }
     }
     public void Disconnected(){
@@ -56,7 +56,7 @@ public class Controller extends JFrame {
         view.Chat(ID, message);
     }
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
         Client c = new Client(ip, port);
         View v = new View();
         Controller thisIsTheProgram = new Controller(c,v);
