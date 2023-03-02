@@ -9,3 +9,5 @@ ngl inget funkar längre och programet startar inte äns längre. Jag vet inte �
 Client funkar isch det blir fortfarande errors om man försöker disconnecta och liknande men servern kan skicka meddelanden till Gui och Client kan skickas till servern.
 
 Jag har en fungernade client som funkar (tror jag) har lagt till en connect och disconnect knapp som ska användas när det finns fler användare. Började jobba med att försöka få en scrollbar men det gick bara inte bra för mig :(
+
+Jag har fixat felen med clienten som inte funkade, Jag behöver lista ut hur man kan få flera clients.
