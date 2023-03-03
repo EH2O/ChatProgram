@@ -19,25 +19,17 @@ public class Controller extends JFrame {
         this.pack();
         this.setVisible(true);
         view.setButtonPresser(new bp());
-        view.setButtonPresserDis(new Dis());
+
         client.StartClient(this);
+        client.CreateSocket();
+
 
     }
 
     public void SetConnection(boolean Stat){
         this.Connected = Stat;
     }
-    private class Dis implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-        if(Connected){
-            client.shutDown();
-        }else{
-            client.StartClient(Controller.this);
-        }
-            Disconnected();
-        }
-    }
+
     public void Disconnected(){
         view.ChangeStatues();
     }
@@ -47,7 +39,6 @@ public class Controller extends JFrame {
 
             client.sendMessage(view.GetMessage());
 
-            view.Chat("Client", view.GetMessage());
             view.ResetText();
 
         }

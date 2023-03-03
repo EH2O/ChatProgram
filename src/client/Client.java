@@ -19,14 +19,11 @@ public class Client {
     public Client(String ip, int port) {
         this.ip = ip;
         this.port = port;
-        CreateSocket(ip,port);
-        if(Connected){
-        System.out.println("Connection ready...");
-        }
+
     }
 
 
-    private void CreateSocket(String ip, int port){
+    public void CreateSocket(){
         Connected = true;
         try {
             socket = new Socket(ip,port);
@@ -53,7 +50,7 @@ public class Client {
 
     public void StartClient(Controller Con){
         while(!Connected){
-            CreateSocket(ip,port);
+            CreateSocket();
         }
             System.out.println("Connected");
             Con.SetConnection(true);

@@ -21,6 +21,9 @@ public class Clients {
         getStreams();
     }
 
+    public void GotMessage(String msg) {
+        out.println(msg);
+    }
     private void getStreams() {
         try {
             out = new PrintWriter(client.getOutputStream(), true);
@@ -32,7 +35,7 @@ public class Clients {
     }
 
     public void setListen(){
-        ListenerThread l = new ListenerThread(in, System.out);
+        ListenerThread l = new ListenerThread(in, System.out, s, id);
         Listen = new Thread(l);
         Listen.start();
     }

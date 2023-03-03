@@ -20,7 +20,7 @@ public class ListenerThread implements Runnable{
         String msg = "";
         while (Connected) {
             if(!msg.equals("")){
-            Con.FromServer("Other" , msg);
+            Con.FromServer("", msg);
             }
             try {
                 msg = in.readLine();

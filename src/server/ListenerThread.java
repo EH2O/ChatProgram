@@ -8,10 +8,13 @@ import java.io.PrintWriter;
 public class ListenerThread implements Runnable{
     private BufferedReader in;
     private PrintStream out;
-
-    public ListenerThread(BufferedReader in, PrintStream out) {
+    Server s;
+    int id;
+    public ListenerThread(BufferedReader in, PrintStream out, Server s, int id) {
         this.in = in;
         this.out = out;
+        this.s = s;
+        this.id = id;
     }
 
     @Override
@@ -21,9 +24,10 @@ public class ListenerThread implements Runnable{
             try {
                 msg = in.readLine();
             } catch (IOException e) {
-                e.printStackTrace();
+                System.out.println("this problem?");
+                stop();
             }
-            out.println(msg);
+            s.GotMessage(id + " " + msg);
         }
     }
 

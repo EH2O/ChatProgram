@@ -41,8 +41,6 @@ public class View {
     public void setButtonPresser(ActionListener bp){
         Sicka.addActionListener(bp);
     }
-    public void setButtonPresserDis(ActionListener Dis){
-        disconnectButton.addActionListener(Dis);
-    }
+
 
 }

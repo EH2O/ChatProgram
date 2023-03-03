@@ -16,6 +16,7 @@ public class Server {
     PrintWriter out;
     BufferedReader in;
 
+
     public Server(int port) {
         try {
             server = new ServerSocket(port);
@@ -25,16 +26,13 @@ public class Server {
         }
         System.out.println("Server started...");
     }
+    public void NewClient(Socket newCon){
+        users.add(new Clients(newCon, TotalUsers, this));
+        TotalUsers++;
+        System.out.println("New user");
+        users.get(users.size()-1).setListen();
 
-    private void acceptClient() {
-        try {
-            users.add(new Clients(server.accept(), TotalUsers, this));
-            TotalUsers++;
-        } catch (IOException e) {
-            System.err.println("Failed to connect to client");
-            e.printStackTrace();
-        }
-        System.out.println("client connected...");
+
     }
 
 
@@ -48,13 +46,16 @@ public class Server {
             out.println(msg);
         }
     }
+    public void GotMessage(String msg){
+        for (Clients user : users) {
+            user.GotMessage(msg);
+        }
+    }
 
     public static void main(String[] args) throws InterruptedException {
         Server s = new Server(6240);
-        s.acceptClient();
-        for (int i = 0; i < s.TotalUsers; i++) {
-            users.get(i).setListen();
-        }
+        AcceptClient join = new AcceptClient(s);
+        join.run();
 
         s.runProtocol();
         for (Clients user : users) {
